@@ -1,6 +1,8 @@
 package uni.isw.Controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -40,13 +42,30 @@ public class ProductoController {
         return productoservice.saveOrUpdate(prod);
     }
     
-    @PutMapping("/productos")
-    public Producto actualizar(@RequestBody Producto prod){
-        return productoservice.saveOrUpdate(prod);
+    @PutMapping("/productos/{id}")
+    public ResponseEntity<Producto> actualizar(@PathVariable int id, @RequestBody Producto detallesProducto){
+        Producto productoExistente = productoservice.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No existe el producto con el ID :" + id));
+        
+        productoExistente.setNombre(detallesProducto.getNombre());
+        productoExistente.setMarca(detallesProducto.getMarca());
+        productoExistente.setCategoria(detallesProducto.getCategoria());
+        productoExistente.setPrecio(detallesProducto.getPrecio());
+        productoExistente.setCantidad(detallesProducto.getCantidad());
+        
+        Producto productoActualizado = productoservice.saveOrUpdate(productoExistente);
+        return ResponseEntity.ok(productoActualizado);
     }
     
-    /*@DeleteMapping("/productos")
-    public void eliminar(@RequestBody Producto prod){
-        productoservice.deleteProducto(id);
-    }*/
+    @DeleteMapping("/productos/{id}")
+    public ResponseEntity<Map<String, Boolean>> eliminar(@PathVariable int id){
+    Producto producto = productoservice.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("No existe el producto con el ID :" + id));
+    
+    productoservice.deleteProducto(id);
+    Map<String, Boolean> response = new HashMap<>();
+    response.put("deleted", Boolean.TRUE);
+    return ResponseEntity.ok(response);
+}
+
 }

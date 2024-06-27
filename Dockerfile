@@ -15,7 +15,7 @@ FROM openjdk:17-slim
 COPY --from=builder /app/target/241CC341SpringVitiBackend-0.0.1-SNAPSHOT.jar /app/vitiBackend.jar
 
 # Puerto en el que la aplicación Spring Boot escuchará las solicitudes
-EXPOSE 8080
+EXPOSE 8081
 
 # Comando para ejecutar la aplicación al iniciar el contenedor
 CMD ["java", "-jar", "/app/vitiBackend.jar"]

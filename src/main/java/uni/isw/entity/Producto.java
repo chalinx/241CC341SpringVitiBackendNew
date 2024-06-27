@@ -22,8 +22,20 @@ public class Producto {
     private double precio;
     private int cantidad;
     
-    //primer commit
+    // Constructor sin parámetros
+    public Producto() {}
 
+    // Constructor con parámetros (opcional)
+    public Producto(int id, String nombre, String marca, String categoria, double precio, int cantidad) {
+        this.id = id;
+        this.nombre = nombre;
+        this.marca = marca;
+        this.categoria = categoria;
+        this.precio = precio;
+        this.cantidad = cantidad;
+    }
+
+    // Getters y Setters
     public int getId() {
         return id;
     }
@@ -71,5 +83,4 @@ public class Producto {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
 }
