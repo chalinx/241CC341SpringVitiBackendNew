@@ -14,7 +14,7 @@
 	<name>241CC341SpringVitiBackend</name>
 	<description>Spring Boot VitiBackend</description>
 	<properties>
-		<java.version>22</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
