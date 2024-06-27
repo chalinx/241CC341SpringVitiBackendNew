@@ -12,7 +12,8 @@ RUN mvn clean install -DskipTests
 FROM openjdk:17-slim
 
 # Copia el artefacto construido desde el contenedor de construcción al contenedor de ejecución
-COPY --from=builder /app/target/241CC341SpringVitiBackend-0.0.1-SNAPSHOT.jar /app/vitiBackend.jar
+#COPY --from=builder /app/target/241CC341SpringVitiBackend-0.0.1-SNAPSHOT.jar /app/vitiBackend.jar
+COPY target/241CC341SpringVitiBackend.jar /app/241CC341SpringVitiBackend.jar
 
 # Puerto en el que la aplicación Spring Boot escuchará las solicitudes
 EXPOSE 8080
