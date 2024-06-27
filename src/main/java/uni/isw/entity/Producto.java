@@ -21,6 +21,8 @@ public class Producto {
     private String categoria;
     private double precio;
     private int cantidad;
+    
+    //primer commit
 
     public int getId() {
         return id;
